@@ -109,7 +109,6 @@ public class TestGrid {
         // Verify the treasure is collected and removed from the grid
         assertTrue(grid.getGrid()[7][2] instanceof Dot, "Treasure should be replaced with a Dot after collection");
 
-
         //[6][2]->[2][1]
         for(int i=0;i<4;i++){
             player.move("w");//[2][2]
