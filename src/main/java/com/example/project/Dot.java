@@ -1,6 +1,6 @@
 package com.example.project;
 
-// Constructing a Dot sprite for every square on the board
+// Constructing a blank Dot sprite for every square on the board
 public class Dot extends Sprite { // Child of sprite
     
     public Dot (int x, int y) {

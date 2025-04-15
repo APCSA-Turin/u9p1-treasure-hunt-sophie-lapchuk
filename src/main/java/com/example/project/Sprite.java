@@ -1,6 +1,6 @@
 package com.example.project;
 
-// Constructs all the Sprites on the board
+// Constructor for all the Sprites on the board
 public class Sprite {
     private int x, y;
 

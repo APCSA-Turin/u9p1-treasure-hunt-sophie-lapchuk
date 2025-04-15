@@ -20,8 +20,7 @@ public class Grid{
     public Sprite[][] getGrid(){return grid;}
 
 
-
-    public void placeSprite(Sprite s){ // Place sprite at it's designated x,y coordinates
+    public void placeSprite(Sprite s){ // Place sprite at its designated x,y coordinates
         // Check boundaries of the grid
         if (s.getX() >= 0 && s.getX() < size && size - s.getY() - 1 >= 0 && size - s.getY() - 1 < size) {
             grid[size - 1 - s.getY()][s.getX()] = s; // Y is reversed, Y corresponds to row, X in order, X corresponds to column
@@ -31,9 +30,8 @@ public class Grid{
         
     }
 
-
-
-    public void placeSprite(Sprite s, String direction) { // Replace previous sprite location with a dot based on direction Sprite moves in
+    // Replace previous sprite location with a dot based on direction Sprite s moves in
+    public void placeSprite(Sprite s, String direction) { 
         placeSprite(s); // Place the sprite
         Dot dot = new Dot(0,0);
 
@@ -58,9 +56,9 @@ public class Grid{
         placeSprite(dot); // Place the new dot with the proper coordinates
     }
 
+    // Display the grid and all of the sprites to the user
     public void display() {
         System.out.println("DISPLAYING GRID");
-         // Print out the grid with the corresponding emojis
          for (Sprite[] row : grid) {
             for (Sprite sprite : row) {
                 System.out.print(sprite);
@@ -69,11 +67,28 @@ public class Grid{
          }
     }
     
-    public void gameover(){ // Display a loss
-        System.out.println("☠️ Game Over.");
+    // Display a loss: fill the grid with red X's
+    public void gameover() { 
+        System.out.println();
+        System.out.println("☠️ Game Over. ☠️");
+        for (Sprite[] row : grid) {
+            for (Sprite sprite : row) {
+                System.out.print("❌ ");
+            }
+
+            System.out.println();
+         }
     }
 
-    public void win(){ // Display a win
-        System.out.println("🎉 You win!");
+    // Display a win: fill the grid with green squares
+    public void win() { 
+        System.out.println();
+        System.out.println("🎉 You win! 🎉");
+        for (Sprite[] row : grid) {
+            for (Sprite sprite : row) {
+                System.out.print("❇️ ");
+            }
+            System.out.println();
+         }
     }
 }

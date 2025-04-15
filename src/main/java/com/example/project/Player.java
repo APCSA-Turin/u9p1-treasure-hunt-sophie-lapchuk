@@ -1,6 +1,6 @@
 package com.example.project;
 
-// Construct a player object that is interactive
+// Construct a player object the user uses to play with
 public class Player extends Sprite {
     private int treasureCount;
     private int numLives;
@@ -17,6 +17,10 @@ public class Player extends Sprite {
     public int getTreasureCount(){return treasureCount;}
     public int getLives(){return numLives;}
     public boolean getWin(){return win;}
+
+    public void setLives(int lives) {
+        numLives = lives;
+    }
 
     @Override
     public void move(String direction) { // Changes the player coordinates based on user input
@@ -54,7 +58,7 @@ public class Player extends Sprite {
     }
 
 
-    public boolean isValid(int size, String direction) { // Check if the movement is valid
+    public boolean isValid(int size, String direction) { // Check if the movement is valid within the boundaries of the grid
         boolean bool = true;
         // Check grid boundaries
         if (direction.equals("w")) {
