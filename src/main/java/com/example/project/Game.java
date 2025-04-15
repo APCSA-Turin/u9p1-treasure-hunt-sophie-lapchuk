@@ -1,6 +1,7 @@
 package com.example.project;
 import java.util.Scanner;
 
+// Construct the game with proper logic
 public class Game{
     private Grid grid;
     private Player player;
@@ -9,10 +10,10 @@ public class Game{
     private Trophy trophy;
     private int size; 
 
-    public Game(int size) { //the constructor should call initialize() and play()
+    public Game(int size) { // The constructor calls initialize() and play()
         this.size = size;
         initialize();
-        System.out.println("Initialized");
+        play();
     }
 
     public boolean validInput(String direction) {
@@ -52,22 +53,88 @@ public class Game{
         Scanner scan = new Scanner(System.in);
         initialize();
 
-
-        while(player.getLives() != 0 && !player.getWin()){
+        while(player.getLives() != 0 && !player.getWin()) { //Keep the game playing when player has all lives and has not won
+            
+            //Clear the screen
             try {
                 Thread.sleep(100); // Wait for 1/10 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             clearScreen(); // Clear the screen at the beggining of the while loop
+
             System.out.println("Game is running...");
-            grid.display();
+            grid.display(); // Display grid
             System.out.println("Choose your direction: w/a/s/d: ");
             String direction = scan.nextLine();
             
-            Sprite current = null;
-            if (!player.isValid(size,direction) || !validInput(direction)) {
-                System.out.println("This is not a valid move.");
+          
+        }
+
+
+        if (player.getWin() == true) {
+            grid.win();
+        } else {
+            grid.gameover();
+        }
+        
+            
+    }
+            
+     
+    
+
+    public void initialize() {
+        this.grid = new Grid(size); // Create a new Grid full of dots based on size parameter
+        this.player = new Player(size-1,0); // Create a new player starting at the bottom left
+        grid.placeSprite(player);
+        // Create lists for Sprites with multiple locations
+        this.enemies = new Enemy[3]; 
+        this.treasures = new Treasure[5]; 
+        this.trophy = new Trophy(size-1, size-1); // Create a trophy placed at the top right
+        grid.placeSprite(trophy);
+
+        // Place each sprite on the board based on randomly generated coordinates
+        for (int i = 0; i < enemies.length; i++) { 
+            int x = generateCoord();
+            int y = generateCoord();
+            
+            while (!(grid.getGrid()[x][y] instanceof Dot)) { // Generate new coordinates if the current coord is NOT a dot object
+                x = generateCoord();
+                y = generateCoord();
+            }
+            enemies[i] = new Enemy(x, y);
+            grid.placeSprite(enemies[i]);
+        }
+        
+
+        for (int i = 0; i < treasures.length; i++) {
+            int x = generateCoord();
+            int y = generateCoord();
+            
+            while (!(grid.getGrid()[x][y] instanceof Dot)) { // Generate new coordinates if the current coord is NOT a dot object
+                x = generateCoord();
+                y = generateCoord();
+            }
+            treasures[i] = new Treasure(x, y);
+            grid.placeSprite(treasures[i]);
+        }
+    }
+
+    // Random coordinate generator based on size
+    public int generateCoord() {
+        return (int) (Math.random() * size);
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game(10);
+    }
+}
+
+  // Sprite current = null;
+            // if (!player.isValid(size,direction) || !validInput(direction)) {
+            //     System.out.println("This is not a valid move.");
             // } else {
             //     if (direction.equals("w")) {
             //         current = grid.getGrid()[player.getY()-1][player.getX()];
@@ -85,64 +152,10 @@ public class Game{
                 
                //player.interact(size, direction, 5, current);
                 
-            }
-            player.move(direction);
-            grid.placeSprite(player, direction);
-                
-                
-
-                
-        }
-        if (player.getWin() == true) {
-            grid.win();
-        } else {
-            grid.gameover();
-        }
-        
             
-    }
-            
-     
-    
+            //player.move(direction);
+            //grid.placeSprite(player, direction);
+                
+                
 
-    public void initialize(){
-
-        //to test, create a player, trophy, grid, treasure, and enemies. Then call placeSprite() to put them on the grid
-        this.grid = new Grid(size);
-        this.player = new Player(size-1,0);
-        grid.placeSprite(player);
-        this.enemies = new Enemy[3];
-        this.trophy = new Trophy(size-1, size-1);
-        grid.placeSprite(trophy);
-
-        for (int i = 0; i < enemies.length; i++) {
-            enemies[i] = new Enemy(generateX(), generateY());
-            grid.placeSprite(enemies[i]);
-        }
-        
-        this.treasures = new Treasure[5];
-        for (int i = 0; i < treasures.length; i++) {
-            treasures[i] = new Treasure(generateX(), generateY());
-            grid.placeSprite(treasures[i]);
-        }
-    
-
-
-        
-        
-   
-    }
-
-    public int generateX() {
-        return (int) (Math.random() * size);
-    }
-
-    public int generateY() {
-        return (int) (Math.random() * size);
-    }
-
-    public static void main(String[] args) {
-        Game game = new Game(10);
-        game.play();
-    }
-}
+                

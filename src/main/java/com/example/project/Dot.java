@@ -1,13 +1,13 @@
 package com.example.project;
 
-
-//Dot only needs a constructor
-public class Dot extends Sprite {
+// Constructing a Dot sprite for every square on the board
+public class Dot extends Sprite { // Child of sprite
+    
     public Dot (int x, int y) {
         super(x,y);
     }
 
-    @Override
+    @Override // Return a white square emoji for the object
     public String toString() {return "⬜️";}
 
 

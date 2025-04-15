@@ -1,5 +1,6 @@
 package com.example.project;
 
+// Constructs all the Sprites on the board
 public class Sprite {
     private int x, y;
 
@@ -8,21 +9,18 @@ public class Sprite {
         this.y = y;
     }
 
-    public int getX(){
-        return x;
-    }
-    public int getY(){
-        return y;
-    }
+    public int getX(){return x;}
+    public int getY(){return y;}
 
     public void setX(int num){
         x = num;
     }
+
     public void setY(int num) {
         y = num;
     }
 
-    public String getCoords(){ //returns the coordinates of the sprite ->"(x,y)"
+    public String getCoords(){ // Returns "Sprite:(x,y)"
         String str = "";
         if (this instanceof Player) {
             str += "Player:";
@@ -36,11 +34,11 @@ public class Sprite {
         if (this instanceof Enemy) {
             str += "Enemy:";
         }
-        str += "(" + x + "," + y + ")";
+        str += "(" + x + "," + y + ")"; // Formatting
         return str;
     }
 
-    public String getRowCol(int size){ //returns the row and column of the sprite -> "[row][col]"
+    public String getRowCol(int size){ // Returns "Sprite:rowcol"
         String str = "";
         if (this instanceof Player) {
             str += "Player:";
@@ -54,8 +52,7 @@ public class Sprite {
         if (this instanceof Enemy) {
             str += "Enemy:";
         }
-        
-        str += "["+ (size - 1 - y)+"]["+x+"]";
+        str += "["+ (size - 1 - y)+"]["+x+"]"; // Formatting
         return str;
     }
     
@@ -67,7 +64,4 @@ public class Sprite {
     public void interact() { //you can leave this empty
         // Default behavior (can be overridden by subclasses)
     }
-
-
-
 }

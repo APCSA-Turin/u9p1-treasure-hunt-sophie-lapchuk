@@ -1,10 +1,10 @@
 package com.example.project;
 
-//only needs a constructor
-public class Trophy extends Treasure { //child of trophy
+// Constructing a trophy that the player collects to win
+public class Trophy extends Treasure { // Child of Treasure, grandchild of Sprite
     public Trophy(int x, int y) {
         super(x,y);
     }
 
-    public String toString() {return "🏆";}
+    public String toString() {return "🏆";} // Return trophy emoji for the board
 }
